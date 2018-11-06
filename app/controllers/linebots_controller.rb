@@ -1,5 +1,6 @@
 class LinebotsController < ApplicationController
   require 'line/bot'
+  require 'bitly'
 
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:callback]
