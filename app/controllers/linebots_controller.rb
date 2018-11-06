@@ -1,6 +1,5 @@
 class LinebotsController < ApplicationController
   require 'line/bot'
-  require 'bitly'
 
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:callback]
@@ -85,7 +84,7 @@ class LinebotsController < ApplicationController
     title = item.get('ItemAttributes/Title')
     # 価格は2箇所から取得しており、1番目の方にデータがない場合は2番目のデータを使う
     price = item.get('ItemAttributes/ListPrice/FormattedPrice') || item.get('OfferSummary/LowestNewPrice/FormattedPrice')
-    url = bitly_shorten(item.get('DetailPageURL'))
+    url = item.get('DetailPageURL')
     image = item.get('LargeImage/URL')
     {
       "type": "bubble",
